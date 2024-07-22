@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamTik</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container, .second-page, .purchase-page {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #bbb;
+        }
+        .login-box {
+            margin-top: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e91e63;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .note p {
+            margin: 5px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #1f1f1f;
+        }
+        .header div {
+            flex: 1;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .header div:first-child {
+            text-align: left;
+        }
+        .header div:last-child {
+            text-align: right;
+        }
+        .profile-info {
+            margin-top: 20px;
+        }
+        .profile-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .profile-info h3 {
+            margin: 10px 0;
+        }
+        .coins-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .coins-info div {
+            text-align: center;
+        }
+        .coins-info .coins {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .coins-info .description {
+            font-size: 0.8rem;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+        .actions button {
+            width: 80%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .follow-button {
+            background-color: #e91e63;
+            color: #fff;
+        }
+        .skip-button {
+            background-color: #555;
+            color: #fff;
+        }
+        .redeem-button {
+            background-color: #333;
+            color: #fff;
+        }
+        .purchase-button {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .purchase-item {
+            background-color: #222;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .purchase-item h3, .purchase-item p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" class="container">
+        <h1>FamTik</h1>
+        <p>100% Real Followers Guaranteed</p>
+        <div class="login-box">
+            <input type="text" id="username" placeholder="Enter TikTok username">
+            <input type="file" id="profilePic" accept="image/*">
+            <button id="loginBtn">Log in</button>
+        </div>
+        <div class="note">
+            <p>✓ Your account must be public.</p>
+            <p>✓ Username must be the same as on TikTok.</p>
+        </div>
+    </div>
+
+    <div id="page2" class="second-page hidden">
+        <div class="header">
+            <div><button id="backBtn">Back</button></div>
+            <div><h2>Your Profile</h2></div>
+            <div><h2>Get Free Coins</h2></div>
+        </div>
+        <div class="profile-info">
+            <h3>Your account Username is @<span id="usernameDisplay"></span></h3>
+            <img id="profilePicDisplay" alt="Profile Picture">
+            <h3 id="randomUsername">@mrpoptaart</h3>
+        </div>
+        <div class="coins-info">
+            <div>
+                <div class="coins" id="coins">0</div>
+                <div class="description">Your Coins</div>
+            </div>
+            <div>
+                <div class="coins" id="followers">0</div>
+                <div class="description">Gained Followers</div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="follow-button" id="followBtn">Follow now and get +2 Coins</button>
+            <button class="skip-button" id="skipBtn">Skip</button>
+            <button class="redeem-button" id="redeemBtn">Redeem Points</button>
+            <button class="purchase-button" id="purchaseBtn">Purchase Points</button>
+        </div>
+        <select id="serviceSelect">
+            <option value="views">Views</option>
+            <option value="likes">Likes</option>
+            <option value="explore">Explore</option>
+            <option value="shares">Shares</option>
+        </select>
+    </div>
+
+    <div id="page3" class="purchase-page hidden">
+        <div class="header">
+            <div><button id="purchaseBackBtn">Back</button></div>
+            <div><h2>Purchase Points</h2></div>
+        </div>
+        <div class="purchase-item">
+            <h3>10,000 Points</h3>
+            <p>Price: 50 جنيه</p>
+            <button class="purchase-item-btn" data-points="10000" data-price="50">Add to Cart</button>
+        </div>
+        <div class="purchase-item">
+            <h3>50,000 Points</h3>
+            <p>Price: 100 جنيه</p>
+            <button class="purchase-item-btn" data-points="50000" data-price="100">Add to Cart</button>
+        </div>
+        <div class="purchase-item">
+            <h3>100,000 Points</h3>
+            <p>Price: 150 جنيه</p>
+            <button class="purchase-item-btn" data-points="100000" data-price="150">Add to Cart</button>
+        </div>
+        <div class="purchase-item">
+            <h3>300,000 Points</h3>
+            <p>Price: 200 جنيه</p>
+            <button class="purchase-item-btn" data-points="300000" data-price="200">Add to Cart</button>
+        </div>
+        <div class="purchase-item">
+            <h3>500,000 Points</h3>
+            <p>Price: 400 جنيه</p>
+            <button class="purchase-item-btn" data-points="500000" data-price="400">Add to Cart</button>
+        </div>
+        <div class="purchase-item">
+            <h3>1M Points</h3>
+            <p>Price: 800 جنيه</p>
+            <button class="purchase-item-btn" data-points="1000000" data-price="800">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        let skipUses = 0;
+        const maxSkipUses = 3;
+        const maxPoints = 1000;
+        const usernames = JSON.parse(localStorage.getItem('usernames')) || [];
+        const userData = JSON.parse(localStorage.getItem('userData')) || {};
+
+        function updateLocalStorage() {
+            localStorage.setItem('usernames', JSON.stringify(usernames));
+            localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const profilePic = document.getElementById('profilePic').files[0];
+
+            if (usernames.length >= 2 && !usernames.includes(username)) {
+                alert('You can only register up to 2 accounts.');
+            } else if (username) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profilePicUrl = e.target.result;
+                    document.getElementById('profilePicDisplay').src = profilePicUrl;
+                    document.getElementById('page1').classList.add('hidden');
+                    document.getElementById('page2').classList.remove('hidden');
+                    document.getElementById('usernameDisplay').textContent = username;
+
+                    if (!usernames.includes(username)) {
+                        usernames.push(username);
+                    }
+                    if (!userData[username]) {
+                        userData[username] = { points: 0, followers: 0 };
+                    }
+
+                    document.getElementById('coins').textContent = userData[username].points;
+                    updateLocalStorage();
+                };
+                reader.readAsDataURL(profilePic);
+            }
+        });
+
+        document.getElementById('followBtn').addEventListener('click', function() {
+            const username = document.getElementById('usernameDisplay').textContent;
+            if (userData[username] && userData[username].points < maxPoints) {
+                userData[username].points += 2;
+                document.getElementById('coins').textContent = userData[username].points;
+                updateLocalStorage();
+            } else {
+                alert('You have reached the maximum number of points.');
+            }
+        });
+
+        document.getElementById('skipBtn').addEventListener('click', function() {
+            if (skipUses < maxSkipUses) {
+                const username = document.getElementById('usernameDisplay').textContent;
+                if (userData[username] && userData[username].points < maxPoints) {
+                    userData[username].points += 10;
+                    document.getElementById('coins').textContent = userData[username].points;
+                    skipUses++;
+                    updateLocalStorage();
+                } else {
+                    alert('You have reached the maximum number of points.');
+                }
+            } else {
+                alert('You have reached the maximum number of skips.');
+            }
+        });
+
+        document.getElementById('redeemBtn').addEventListener('click', function() {
+            const username = document.getElementById('usernameDisplay').textContent;
+            const points = parseInt(document.getElementById('coins').textContent, 10);
+            const selectedService = document.getElementById('serviceSelect').value;
+
+            if (points >= 1000) {
+                const message = `Hello, I want to redeem points. Username: ${username}, Points: 1000, Service: ${selectedService}`;
+                window.open(`https://wa.me/201148890072?text=${encodeURIComponent(message)}`, '_blank');
+            } else {
+                alert('Not enough points to redeem.');
+            }
+        });
+
+        document.getElementById('purchaseBtn').addEventListener('click', function() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+        });
+
+        document.getElementById('backBtn').addEventListener('click', function() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page1').classList.remove('hidden');
+        });
+
+        document.getElementById('purchaseBackBtn').addEventListener('click', function() {
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        });
+
+        document.querySelectorAll('.purchase-item-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const points = this.getAttribute('data-points');
+                const price = this.getAttribute('data-price');
+                const username = document.getElementById('usernameDisplay').textContent;
+
+                if (userData[username] && userData[username].points >= 1000) {
+                    const message = `Hello, I want to purchase ${points} points for ${price} جنيه.`;
+                    window.open(`https://wa.me/201148890072?text=${encodeURIComponent(message)}`, '_blank');
+                } else {
+                    alert('You need to have 1000 points to make a purchase.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
